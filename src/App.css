@@ -1,0 +1,33 @@
+.wrapper {
+  padding: 2rem 4rem;
+}
+
+.zoneTitle {
+  font-weight: 700;
+  color: #1C275C;
+  text-decoration: underline;
+}
+
+.action-btn {
+  background: #fb3569;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 40px;
+  color: white;
+  font-weight: 500;
+  cursor: pointer
+}
+
+.action-btn:hover{
+  background: #db0053;
+}
+
+.btn-secondary {
+  background: white;
+  color: #1C275C;
+  border: solid 1px #ADBBE3
+}
+
+.btn-secondary:hover {
+  background: #f5f7f7;
+}
