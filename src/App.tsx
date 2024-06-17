@@ -47,7 +47,7 @@ function App() {
   return (
     <div className="wrapper">
 
-    <div><h1 style={{color: "#1C275C"}}>CYF Birthday messages 🥳</h1></div>
+    <div><h1 style={{color: "#1C275C"}}>CYF Birthday messages 🥳 <span style={{color: "#1C275C", fontSize: '10px'}}>made easy</span></h1></div>
     <div style={{display: 'flex', gap: '1rem'}}>
       <div>
     <label>Choose a day:</label>
