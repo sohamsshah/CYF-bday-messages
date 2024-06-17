@@ -1,4 +1,4 @@
-export const getFormattedBdayMap = (birthdayMap) => {
+export const getFormattedBdayMap = (birthdayMap: {[key: string]: [{name: string, mobileNumber: string, zoneName: string}]}) => {
     return Object.keys(birthdayMap).reduce((acc, curr) => {
         const zoneMap = birthdayMap[curr].reduce((map, userDetails) => {
             if(map[userDetails.zoneName]){

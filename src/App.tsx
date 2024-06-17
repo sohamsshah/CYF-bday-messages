@@ -28,17 +28,19 @@ In case of additional information, Feel free to connect any of the Core Committe
 
 function App() {
   const today = new Date();
-  const bdayMap = getFormattedBdayMap(birthdayMap)
+  const bdayMap: {[key: string]: {
+    [key: string]: [{name: string, mobileNumber: string}]
+  //@ts-ignore
+  }} = getFormattedBdayMap(birthdayMap)
   const dd = today.getDate();
 
 // Get the month (adding 1 because months are zero-based)
   const mm = today.getMonth() + 1;
 
-  const [dateDetails, setDateDetails] = useState({day: dd, month: mm})
+  const [dateDetails, setDateDetails] = useState<{day: number, month: number}>({day: dd, month: mm})
 
-  const selectedDate = dateDetails.month + '/' + dateDetails.day
+  const selectedDate: string = dateDetails.month + '/' + dateDetails.day
   const todaysBday = bdayMap[selectedDate]
-
 
   return (
     <div className="wrapper">
@@ -46,13 +48,13 @@ function App() {
     <div><h1 style={{color: "#1C275C"}}>CYF Birthday messages 🥳</h1></div>
     <div style={{display: 'flex', gap: '1rem'}}>
       <div>
-    <label for="day">Choose a day:</label>
+    <label>Choose a day:</label>
     <select value={dateDetails.day} onChange={e => setDateDetails({...dateDetails, day: +e.target.value})} name="day" id="day">
       {[...Array(31).keys()].map(dayNumber => <option value={dayNumber+1}>{dayNumber+1}</option>)}
     </select>
     </div>
     <div>
-    <label for="month">Choose a month:</label>
+    <label>Choose a month:</label>
     <select value={dateDetails.month} onChange={e => setDateDetails({...dateDetails, month: +e.target.value})} name="month" id="month">
       {[...Array(12).keys()].map(monthNumber => <option value={monthNumber+1}>{monthNumber+1}</option>)}
     </select>
@@ -61,12 +63,12 @@ function App() {
     </div>
 
      {Object.keys(todaysBday).map(zone => {
-      const allZonePeople = todaysBday[zone].length === 1 ? todaysBday[zone][0].name : todaysBday[zone].reduce((acc, curr) => [...acc, curr.name], []).join(",") 
+      const allZonePeople = todaysBday[zone].length === 1 ? todaysBday[zone][0]?.name : todaysBday[zone].reduce((acc, curr) => [...acc, curr.name], []).join(",") 
         return <div key={zone}>
           <p className="zoneTitle">{zone}</p>
           <p style={{fontWeight: 'bold'}}>Birthday members:</p>
           <ol>
-          {todaysBday[zone].map(user => {
+          {todaysBday[zone].map((user: {name: string, mobileNumber: string}) => {
             return <li>
               <p><span style={{fontWeight: "bold"}}>{user.name}</span> -  {user.mobileNumber}</p> 
               <a href={`https://wa.me/${user.mobileNumber}?text=${CYF_PERSONAL_MESSAGE}`}><p>Click here to send personal message in one click</p></a>
