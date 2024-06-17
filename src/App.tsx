@@ -42,6 +42,8 @@ function App() {
   const selectedDate: string = dateDetails.month + '/' + dateDetails.day
   const todaysBday = bdayMap[selectedDate]
 
+  console.log(todaysBday)
+
   return (
     <div className="wrapper">
 
@@ -62,7 +64,7 @@ function App() {
 
     </div>
 
-     {Object.keys(todaysBday).map(zone => {
+     {todaysBday !== undefined ? Object.keys(todaysBday).map(zone => {
       const allZonePeople = todaysBday[zone].length === 1 ? todaysBday[zone][0]?.name : todaysBday[zone].reduce((acc, curr) => [...acc, curr.name], []).join(",") 
         return <div key={zone}>
           <p className="zoneTitle">{zone}</p>
@@ -85,7 +87,7 @@ function App() {
            <button className="action-btn" onClick={() => navigator.clipboard.writeText(getBirthdayWish(allZonePeople))}>Copy group message</button>  
         </div>
        
-     })}
+     }): <div style={{marginTop: '2rem'}}>No birthdays found for this date!</div>}
     </div>
   )
 }
